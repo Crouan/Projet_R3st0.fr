@@ -54,7 +54,11 @@ if (!isset($_GET["idR"])) {
         $aimer = AimerDAO::estAimeById($idU, $idR);
         $maCritique = CritiqueDAO::getOneById($idR, $idU);
         $monCommentaire = "";
-        
+
+        // Coordonnées du restaurant (à récupérer dynamiquement en PHP) 
+        $latitude = $unResto->getLatitudeDegR(); // Latitude du resto
+        $longitude = $unResto->getLongitudeDegR(); // Longitude du resto
+
         if ($maCritique) {
             $monCommentaire = $maCritique->getCommentaire();
         }

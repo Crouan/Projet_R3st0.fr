@@ -6,8 +6,7 @@
  * @version 08/2021 Gestion des messages d'erreur
  * 
  * 
- * Variables transmises par le contrôleur contenant les données à afficher :  
-  ---------------------------------------------------------------------------------- */
+ * Variables transmises par le contrôleur contenant les données à afficher :  */
 /** @var array $GLOBALS['lesMessages'] liste des messages (d'erreurs) à afficher */
 /** @var string $GLOBALS['isLoggedOn'] témoin de la réalité de la connexion d'un utilisateur */
 /** @var string $titre */
@@ -42,7 +41,7 @@
                 <li><a href="./?action=recherche"><img src="images/rechercher.png" alt="loupe" />Recherche</a></li>
                 <li></li> 
                 <li id="logo"><a href="./?action=accueil"><img src="images/logoBarre.png" alt="logo" /></a></li>
-                <li><a href="./?action=Liste">Liste</a></li> 
+                <li></li> 
                 <li><a href="./?action=cgu">CGU</a></li>
                 <?php 
                     if ($GLOBALS['isLoggedOn']) { 

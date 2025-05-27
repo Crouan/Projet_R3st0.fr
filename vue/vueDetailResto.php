@@ -14,7 +14,7 @@
 /** @var string $mailU  */
 /** @var bool $aimer  */
 /** @var array $critiques  */
-/** @var Critique $maCritique  */
+/**  @var Critique $maCritique  */
 /** @var string $monCommentaire */
 /**
  * Variables supplémentaires :  */
@@ -22,7 +22,15 @@
 /** @var Photo $laPhoto */
 /** @var Critique $uneCritique */
 ?>
+
 <!DOCTYPE html>
+
+<header>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</header>
 
 <h1><?= $unResto->getNomR(); ?>
     
@@ -76,7 +84,13 @@
     <?= $unResto->getVoieAdr(); ?><br />
     <?= $unResto->getCpR(); ?>
     <?= $unResto->getVilleR(); ?>
->
+</p>
+
+<!-- Stockage des coordonnées dans le DOM -->
+<span id="location-data" longitude="<?= htmlspecialchars($longitude) ?>" latitude="<?= htmlspecialchars($latitude) ?>"></span>
+<!-- Conteneur de la carte -->
+<div id="map" style="height: 400px; width: 100%; margin-top: 20px;"></div>
+
 
 <h2 id="photos">
     Photos  
@@ -147,3 +161,25 @@ if ($mailU) {
     <?php
 }
 ?>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Récupérer les coordonnées depuis l'élément caché
+        const locationElement = document.getElementById('location-data');
+        const longitude = parseFloat(locationElement.getAttribute('longitude'));
+        const latitude = parseFloat(locationElement.getAttribute('latitude'));
+
+        // Initialiser la carte centré sur la position
+        const map = L.map('map').setView([latitude, longitude], 13);
+
+        // Ajouter une couche de tuiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Ajouter un marqueur à la position
+        const marker = L.marker([latitude, longitude]).addTo(map);
+        marker.bindPopup("Position du restaurant").openPopup();
+    });
+</script>
+
